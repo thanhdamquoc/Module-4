@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="templates :: head"></head>
+<body>
+<div class="container">
+  <h1>Add new product</h1>
+  <a th:href="@{/product}">Back to Home</a>
+  <form th:action="@{/product/add}" method="post" th:object="${product}">
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Producer</th>
+      </tr>
+      <tr>
+        <td><input type="text" th:field="*{id}"></td>
+        <td><input type="text" th:field="*{name}"></td>
+        <td><input type="text" th:field="*{price}"></td>
+        <td><input type="text" th:field="*{description}"></td>
+        <td><input type="text" th:field="*{producer}"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Add new product"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

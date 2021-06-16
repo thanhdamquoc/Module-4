@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="templates :: head"></head>
+<body>
+<div class="container">
+    <h1>List</h1>
+    <a th:href="@{/product}">Refresh</a><br>
+    <a th:href="@{/product/add}">Add new product</a><br>
+    <div th:text="${message}"></div>
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Producer</th>
+            <th scope="col">View/Edit</th>
+            <th scope="col">Remove</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td scope="row" th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.producer}"></td>
+            <td><a th:href="@{/product/{id}/view(id=${product.id})}">View/Edit</a></td>
+            <td><a th:href="@{/product/{id}/remove(id=${product.id})}">Remove</a></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
