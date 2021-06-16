@@ -1,0 +1,14 @@
+com/codegym/model/Product.java
+ com.codegym.model.Product
+com/codegym/config/AppConfig.java
+ com.codegym.config.AppConfig
+com/codegym/service/ProductService.java
+ com.codegym.service.ProductService
+com/codegym/model/ProductForm.java
+ com.codegym.model.ProductForm
+com/codegym/service/IProductService.java
+ com.codegym.service.IProductService
+com/codegym/config/AppInit.java
+ com.codegym.config.AppInit
+com/codegym/controller/ProductController.java
+ com.codegym.controller.ProductController

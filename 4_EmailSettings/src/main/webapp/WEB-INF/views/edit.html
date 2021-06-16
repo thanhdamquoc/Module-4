@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+<nav th:replace="layout::navbar"></nav>
+<div class="container">
+  <h1>Settings</h1>
+  <form method="post" th:action="@{/email/edit}" th:object="${emailSettings}">
+    <table class="table table-borderless">
+      <tr>
+        <th><label class="form-label">Languages</label></th>
+        <td>
+          <select class="form-select" th:field="*{language}">
+            <option th:each="lang : ${languages}" th:value="${lang}" th:text="${lang}"></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Page size:</th>
+        <td>
+          <span>Show </span>
+          <select class="form-select" th:field="*{pageSize}">
+            <option th:each="size : ${sizes}" th:value="${size}" th:text="${size}" size="5"></option>
+          </select>
+          <span> emails per page</span>
+        </td>
+      </tr>
+      <tr>
+        <th>Spams filter:</th>
+        <td>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" th:value="true" th:default="false" th:field="*{spamFilterEnabled}">
+            <label class="form-check-label">
+              Enable spams filter
+            </label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>Signature:</th>
+        <td>
+          <textarea class="form-control" th:field="*{signature}" th:value="*{signature}"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <button class="btn btn-primary" type="submit">Update</button>
+          <a class="btn btn-secondary" th:href="@{/email}" role="button">Cancel</a>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</body>
+</html>

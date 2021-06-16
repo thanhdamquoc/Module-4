@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+<nav th:replace="layout::navbar"></nav>
+<div class="container">
+    <span style="color:green" th:text="${message}"></span>
+    <br><br>
+    <a th:href="@{/email/edit}" class="btn btn-light">Change email settings</a>
+</div>
+</body>
+</html>
