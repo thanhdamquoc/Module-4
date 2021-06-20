@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table tr,th,td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="category : ${categories}">
+        <div th:object="${category}">
+            <td><span th:text="*{id}"></span></td>
+            <td><span th:text="*{name}"></span></td>
+            <td><a th:href="@{/category/{id}/view(id = *{id})}">view</a></td>
+        </div>
+    </tr>
+
+    <tr>
+        <form th:action="@{/category/add}" method="post" th:object="${newCategory}">
+            <td><span>new product</span></td>
+            <td><input type="text" th:field="*{name}"></td>
+            <td><input type="submit" value="add"></td>
+        </form>
+    </tr>
+</table>
+</body>
+</html>

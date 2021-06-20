@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="index::head"></head>
+<body>
+<div class="container">
+    <nav th:replace="index::navbar"></nav>
+<div>
+    <h2 th:text="${blog.title}" style="border-top: 1px solid gray"></h2>
+    <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
+    (<span th:text="${blog.id}" style="font-size: smaller"></span>)
+    <p th:text="${blog.content}" style="margin-bottom: 0px"></p>
+    <span th:text="${blog.likes}" style="font-weight: bold"></span> likes<br>
+    <a th:href="@{/blog/__${blog.id}__/like}" class="btn btn-primary btn-sm">Like</a>
+    <a th:href="@{/blog/__${blog.id}__/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
+</div>
+</div>
+</body>
+</html>

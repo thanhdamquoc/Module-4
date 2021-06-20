@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="index::head"></head>
+<body>
+  <div class="container">
+    <nav th:replace="index::navbar"></nav>
+    <h1>Blog List</h1>
+    <table class="table">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Published Date</th>
+      </tr>
+      <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.id}"></td>
+        <td><a th:text="${blog.title}" th:href="@{/blog/__${blog.id}__/view}"></a></td>
+        <td th:text="${blog.date}"></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c33a07a2-211d-4667-982f-8fec1ed8a979" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/service/impl/HibernateCustomerServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customer-management/src/main/resources/hibernate.conf.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/customer-management/src/main/webapp/WEB-INF/templates/customers/add.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/config/AppInit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/controller/VoteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/model/Vote.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/repository/VoteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/service/VoteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/java/com/codegym/service/VoteServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/resources/hibernate.conf.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../5_ImageOfTheDay/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1_CustomerList/customer-management" beforeDir="false" afterPath="$PROJECT_DIR$/../1_CustomerList/customer-management" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../2_CustomerManagement/customer-management" beforeDir="false" afterPath="$PROJECT_DIR$/../2_CustomerManagement/customer-management" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4_FormAndDataBinding/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../4_FormAndDataBinding/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../4_LoginApplication/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../4_LoginApplication/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-management/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/customer-management/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/customer-management/src/main/java/cg/wbd/grandemonstration/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer-management/src/main/webapp/WEB-INF/templates/customers/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/customer-management/src/main/webapp/WEB-INF/templates/customers/list.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="5_CustomerManagement" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="5_CustomerManagement" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/customer-management" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="ProjectId" id="1u3VL8KorQNEIIiftkSMnSpi0cE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/customer-management" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c33a07a2-211d-4667-982f-8fec1ed8a979" name="Default Changelist" comment="" />
+      <created>1623894203187</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623894203187</updated>
+      <workItem from="1623894205687" duration="50000" />
+      <workItem from="1623899254281" duration="638000" />
+      <workItem from="1623904434944" duration="31000" />
+      <workItem from="1623920804156" duration="1215000" />
+      <workItem from="1623981132791" duration="62000" />
+      <workItem from="1623981946194" duration="71000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
