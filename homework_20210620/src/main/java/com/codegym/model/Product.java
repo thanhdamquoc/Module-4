@@ -10,7 +10,8 @@ public class Product {
 
     private String name;
 
-//    private Category category;
+    @ManyToOne
+    private Category category;
 
     public Product() {
     }
@@ -34,5 +35,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

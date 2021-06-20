@@ -15,12 +15,14 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Category</th>
         <th>Actions</th>
     </tr>
     <tr th:each="product : ${products}">
         <div th:object="${product}">
             <td><span th:text="*{id}"></span></td>
             <td><span th:text="*{name}"></span></td>
+            <td><span th:text="*{category.name}"></span></td>
             <td><a th:href="@{/product/{id}/view(id = *{id})}">view</a></td>
         </div>
     </tr>
@@ -29,6 +31,11 @@
         <form th:action="@{/product/add}" method="post" th:object="${newProduct}">
             <td><span>new product</span></td>
             <td><input type="text" th:field="*{name}"></td>
+            <td>
+                <select th:name="categoryId">
+                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+                </select>
+            </td>
             <td><input type="submit" value="add"></td>
         </form>
     </tr>
