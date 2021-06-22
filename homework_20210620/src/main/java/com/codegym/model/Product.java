@@ -13,12 +13,21 @@ public class Product {
     @ManyToOne
     private Category category;
 
+    private String image;
+
     public Product() {
     }
 
     public Product(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Product(Long id, String name, Category category, String image) {
+        this.id = id;
+        this.name = name;
+        this.category = category;
+        this.image = image;
     }
 
     public Long getId() {
@@ -43,5 +52,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -29,6 +29,9 @@
     <h1>News</h1>
     <div th:each="blog : ${blogs}" style="margin-top: 25px">
         <a th:href="@{/blog/__${blog.id}__/view}" style="text-decoration: none; color: black"><h2 th:text="${blog.title}" style="border-top: 1px solid gray"></h2></a>
+        <div th:if="${blog.category}">
+            <span th:text="${blog.category.name}" style="color: blue"></span>
+        </div>
         <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
         (<span th:text="${blog.id}" style="font-size: smaller"></span>)
         <p th:text="${blog.content}" style="margin-bottom: 0px"></p>

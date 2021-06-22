@@ -2,12 +2,12 @@ package com.codegym.service;
 
 import com.codegym.model.Category;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface CategoryService {
-    List<Category> findAll();
+    Iterable<Category> findAll();
 
-    Category findById(Long id);
+    Optional<Category> findById(Long id);
 
     void save(Category category);
 

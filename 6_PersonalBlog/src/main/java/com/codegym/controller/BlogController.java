@@ -1,8 +1,11 @@
 package com.codegym.controller;
 
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
 import com.codegym.service.BlogService;
+import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +18,9 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping
     public ModelAndView showIndex() {
         ModelAndView modelAndView = new ModelAndView("index");
@@ -26,6 +32,7 @@ public class BlogController {
     public ModelAndView showAddForm() {
         ModelAndView modelAndView = new ModelAndView("add");
         modelAndView.addObject("blog", new Blog());
+        modelAndView.addObject("categories", categoryService.findAll());
         return modelAndView;
     }
 
@@ -38,13 +45,13 @@ public class BlogController {
 
     @GetMapping("/{id}/remove")
     public String removeBlog(@PathVariable Long id) {
-        blogService.remove(id);
+        blogService.deleteById(id);
         return "redirect:/blog";
     }
 
     @GetMapping("/{id}/like")
     public String likeBlog(@PathVariable Long id) {
-        Blog blog = blogService.findById(id);
+        Blog blog = blogService.findById(id).get();
         blog.setLikes(blog.getLikes()+1);
         blogService.save(blog);
         return "redirect:/blog";
@@ -52,7 +59,7 @@ public class BlogController {
 
     @GetMapping("/{id}/unlike")
     public String unlikeBlog(@PathVariable Long id) {
-        Blog blog = blogService.findById(id);
+        Blog blog = blogService.findById(id).get();
         blog.setLikes(blog.getLikes()-1);
         blogService.save(blog);
         return "redirect:/blog";
@@ -68,7 +75,7 @@ public class BlogController {
     @GetMapping("/{id}/view")
     public ModelAndView showView(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("view");
-        modelAndView.addObject("blog", blogService.findById(id));
+        modelAndView.addObject("blog", blogService.findById(id).get());
         return modelAndView;
     }
 }

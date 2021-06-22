@@ -11,10 +11,15 @@
     </style>
 </head>
 <body>
+<form th:action="@{product}" method="get">
+    <input type="text" th:name="q" th:value="${q}">
+    <button>search</button>
+</form>
 <table>
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Image</th>
         <th>Category</th>
         <th>Actions</th>
     </tr>
@@ -22,17 +27,18 @@
         <div th:object="${product}">
             <td><span th:text="*{id}"></span></td>
             <td><span th:text="*{name}"></span></td>
+            <td><img width="100" th:src="@{'/image/' + *{image}}" alt=""></td>
             <td><span th:text="*{category.name}"></span></td>
             <td><a th:href="@{/product/{id}/view(id = *{id})}">view</a></td>
         </div>
     </tr>
-
     <tr>
-        <form th:action="@{/product/add}" method="post" th:object="${newProduct}">
+        <form th:action="@{/product/add}" method="post" th:object="${newProductForm}" enctype="multipart/form-data">
             <td><span>new product</span></td>
             <td><input type="text" th:field="*{name}"></td>
+            <td><input type="file" th:field="*{image}"></td>
             <td>
-                <select th:name="categoryId">
+                <select th:field="*{category}">
                     <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
                 </select>
             </td>
@@ -40,5 +46,10 @@
         </form>
     </tr>
 </table>
+<div>
+    <a th:href="@{'/product'(page=${products.number - 1}, q= ${q})}" th:if="${products.hasPrevious()}">Previous</a>
+    <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+    <a th:href="@{'/product'(page=${products.number + 1}, q= ${q})}" th:if="${products.hasNext()}">Next</a>
+</div>
 </body>
 </html>

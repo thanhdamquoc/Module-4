@@ -1,12 +1,9 @@
 package com.codegym.repository;
 
 import com.codegym.model.Blog;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface BlogRepository {
-    public List<Blog> findAll();
-    public Blog findById(Long id);
-    public boolean save(Blog blog);
-    public boolean remove(Long id);
+@Repository
+public interface BlogRepository extends CrudRepository<Blog, Long> {
 }

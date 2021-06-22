@@ -15,8 +15,10 @@ public class Blog {
 
     private int likes;
 
-    @Column(nullable = false, columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
     private Date date;
+
+    @ManyToOne
+    private Category category;
 
     public Blog() {
     }
@@ -34,6 +36,15 @@ public class Blog {
         this.content = content;
         this.likes = likes;
         this.date = date;
+    }
+
+    public Blog(Long id, String title, String content, int likes, Date date, Category category) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.likes = likes;
+        this.date = date;
+        this.category = category;
     }
 
     public Long getId() {
@@ -74,5 +85,13 @@ public class Blog {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

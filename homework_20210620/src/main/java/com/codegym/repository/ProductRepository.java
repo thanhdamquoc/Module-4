@@ -1,15 +1,12 @@
 package com.codegym.repository;
 
 import com.codegym.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ProductRepository {
-    List<Product> findAll();
-
-    Product findById(Long id);
-
-    void save(Product product);
-
-    void remove(Long id);
+@Repository
+public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
+    Page<Product> findAllByNameContaining(String q, Pageable pageable);
 }

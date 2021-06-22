@@ -30,7 +30,7 @@ public class CategoryController {
     @GetMapping("/{id}/view")
     public ModelAndView showView(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("category/view");
-        Category category = categoryService.findById(id);
+        Category category = categoryService.findById(id).get();
         modelAndView.addObject("category", category);
         return modelAndView;
     }

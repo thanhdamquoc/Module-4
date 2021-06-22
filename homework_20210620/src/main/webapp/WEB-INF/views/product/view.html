@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-<form th:action="@{/product/update}" method="post" th:object="${product}">
+<form th:action="@{/product/update}" method="post" th:object="${product}" enctype="multipart/form-data">
   <table>
     <tr>
       <th>ID</th>
@@ -20,6 +20,22 @@
     <tr>
       <th>Name</th>
       <td><input th:field="*{name}"></td>
+    </tr>
+    <tr>
+      <th>Category</th>
+      <td>
+        <select th:field="*{category}">
+          <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <th>Image</th>
+      <td><img width="100" th:src="@{'/image/' + *{image}}" alt=""></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><input type="file" th:name="imageFile"></td>
     </tr>
     <tr>
       <td><input type="submit" value="update"></td>

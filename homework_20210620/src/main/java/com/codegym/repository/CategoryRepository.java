@@ -1,15 +1,11 @@
 package com.codegym.repository;
 
 import com.codegym.model.Category;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CategoryRepository {
-    List<Category> findAll();
-
-    Category findById(Long id);
-
-    void save(Category category);
-
-    void remove(Long id);
+@Repository
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Long> {
 }
