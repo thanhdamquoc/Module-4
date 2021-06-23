@@ -13,7 +13,9 @@
             <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
             (<span th:text="${blog.id}" style="font-size: smaller"></span>)
             <p th:text="${blog.content}" style="margin-bottom: 0px"></p>
-            <span th:text="${blog.likes}" style="font-weight: bold"></span> likes<br>
+            <span th:text="*{likes}" style="font-weight: bold"></span><span> likes</span>
+            <span> </span>
+            <span th:text="${comments.get().count()}" style="font-weight: bold"></span><span> comments</span><br>
             <a th:href="@{/blog/__${blog.id}__/view/like}" class="btn btn-primary btn-sm">Like</a>
             <a th:href="@{/blog/__${blog.id}__/view/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
         </div><br>
@@ -22,6 +24,7 @@
             <form th:object="${newComment}" th:action="@{/blog/__${blog.id}__/view/comment}" method="post">
                 <input hidden th:field="*{id}">
                 <textarea th:field="*{content}" placeholder="Add new comment..." style="width: 50%; height: 50px"></textarea><br>
+                <td th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Name Error</td>
                 <input type="submit" value="submit" class="btn btn-primary btn-sm">
             </form>
         </div>

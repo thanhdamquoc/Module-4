@@ -1,5 +1,6 @@
 package com.codegym.service.comment;
 
+import com.codegym.exception.HasForbiddenWordsException;
 import com.codegym.model.Blog;
 import com.codegym.model.Comment;
 import org.springframework.data.domain.Page;
@@ -12,7 +13,7 @@ public interface CommentService {
 
     Optional<Comment> findById(Long id);
 
-    void save(Comment comment);
+    void save(Comment comment) throws HasForbiddenWordsException;
 
     void deleteById(Long id);
 

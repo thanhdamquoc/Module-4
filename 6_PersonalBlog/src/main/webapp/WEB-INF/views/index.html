@@ -49,8 +49,9 @@
 
                         <p th:text="*{content}" style="margin-bottom: 0px"></p>
 
-                        <span th:text="*{likes}" style="font-weight: bold"></span> likes
-                        <span th:text="*{commentCount}" style="font-weight: bold"></span> comments<br>
+                        <span th:text="*{likes}" style="font-weight: bold"></span><span> likes</span>
+                        <span> </span>
+                        <span th:text="*{commentCount}" style="font-weight: bold"></span><span> comments</span><br>
                         <a th:href="@{/blog/__${blog.id}__/like}" class="btn btn-primary btn-sm">Like</a>
                         <a th:href="@{/blog/__${blog.id}__/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
                         <a th:href="@{/blog/__${blog.id}__/view}" class="btn btn-primary btn-sm">Comment</a>

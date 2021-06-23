@@ -1,17 +1,17 @@
 package com.codegym.controller;
 
+import com.codegym.exception.HasForbiddenWordsException;
 import com.codegym.model.Blog;
 import com.codegym.model.Comment;
-import com.codegym.model.IBlogComment;
 import com.codegym.service.blog.BlogService;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -107,10 +107,14 @@ public class BlogController {
     }
 
     @PostMapping("/{id}/view/comment")
-    public String submitComment(@ModelAttribute Comment newComment, @PathVariable(name = "id") Long blogId) {
+    public String submitComment(@Validated @ModelAttribute Comment newComment, @PathVariable(name = "id") Long blogId) {
         newComment.setDate(new Date());
         newComment.setBlog(blogService.findById(blogId).get());
-        commentService.save(newComment);
+        try {
+            commentService.save(newComment);
+        } catch (HasForbiddenWordsException e) {
+            return "/error";
+        }
         return "redirect:/blog/" + blogId + "/view";
     }
 }
