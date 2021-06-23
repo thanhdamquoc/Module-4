@@ -1,11 +1,16 @@
 package com.codegym.controller;
 
 import com.codegym.model.Blog;
-import com.codegym.model.Category;
-import com.codegym.service.BlogService;
-import com.codegym.service.CategoryService;
+import com.codegym.model.Comment;
+import com.codegym.model.IBlogComment;
+import com.codegym.service.blog.BlogService;
+import com.codegym.service.category.CategoryService;
+import com.codegym.service.comment.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,18 +26,21 @@ public class BlogController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private CommentService commentService;
+
     @GetMapping
-    public ModelAndView showIndex() {
+    public ModelAndView showIndex(@PageableDefault(sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("blogs", blogService.findAll());
+        modelAndView.addObject("blogs", blogService.getBlogAndComment());
         return modelAndView;
     }
 
     @GetMapping("/add")
-    public ModelAndView showAddForm() {
+    public ModelAndView showAddForm(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("add");
         modelAndView.addObject("blog", new Blog());
-        modelAndView.addObject("categories", categoryService.findAll());
+        modelAndView.addObject("categories", categoryService.findAll(pageable));
         return modelAndView;
     }
 
@@ -66,16 +74,43 @@ public class BlogController {
     }
 
     @GetMapping("/list")
-    public ModelAndView showList() {
+    public ModelAndView showList(@PageableDefault(sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("list");
-        modelAndView.addObject("blogs", blogService.findAll());
+        modelAndView.addObject("blogs", blogService.findAll(pageable));
         return modelAndView;
     }
 
     @GetMapping("/{id}/view")
-    public ModelAndView showView(@PathVariable Long id) {
+    public ModelAndView showView(@PathVariable Long id,@PageableDefault(sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("view");
-        modelAndView.addObject("blog", blogService.findById(id).get());
+        Blog blog = blogService.findById(id).get();
+        modelAndView.addObject("blog", blog);
+        modelAndView.addObject("comments", commentService.findAllByBlog(blog, pageable));
+        modelAndView.addObject("newComment", new Comment());
         return modelAndView;
+    }
+
+    @GetMapping("/{id}/view/like")
+    public String likeBlogView(@PathVariable Long id) {
+        Blog blog = blogService.findById(id).get();
+        blog.setLikes(blog.getLikes()+1);
+        blogService.save(blog);
+        return "redirect:/blog/" + id + "/view" ;
+    }
+
+    @GetMapping("/{id}/view/unlike")
+    public String unlikeBlogView(@PathVariable Long id) {
+        Blog blog = blogService.findById(id).get();
+        blog.setLikes(blog.getLikes()-1);
+        blogService.save(blog);
+        return "redirect:/blog/" + id + "/view";
+    }
+
+    @PostMapping("/{id}/view/comment")
+    public String submitComment(@ModelAttribute Comment newComment, @PathVariable(name = "id") Long blogId) {
+        newComment.setDate(new Date());
+        newComment.setBlog(blogService.findById(blogId).get());
+        commentService.save(newComment);
+        return "redirect:/blog/" + blogId + "/view";
     }
 }

@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <title>My Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="index::head"></head>
 <body>
 <div class="container">
     <nav th:replace="index::navbar"></nav>
-<div>
-    <h2 th:text="${blog.title}" style="border-top: 1px solid gray"></h2>
-    <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
-    (<span th:text="${blog.id}" style="font-size: smaller"></span>)
-    <p th:text="${blog.content}" style="margin-bottom: 0px"></p>
-    <span th:text="${blog.likes}" style="font-weight: bold"></span> likes<br>
-    <a th:href="@{/blog/__${blog.id}__/like}" class="btn btn-primary btn-sm">Like</a>
-    <a th:href="@{/blog/__${blog.id}__/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
-</div>
+    <div>
+        <div th:object="${blog}">
+            <h2 th:text="${blog.title}"></h2>
+            <img th:if="*{image}" th:src="*{image}"><br>
+            <span th:text="${blog.category.name}" style="color: blue"></span>
+            <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
+            (<span th:text="${blog.id}" style="font-size: smaller"></span>)
+            <p th:text="${blog.content}" style="margin-bottom: 0px"></p>
+            <span th:text="${blog.likes}" style="font-weight: bold"></span> likes<br>
+            <a th:href="@{/blog/__${blog.id}__/view/like}" class="btn btn-primary btn-sm">Like</a>
+            <a th:href="@{/blog/__${blog.id}__/view/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
+        </div><br>
+
+        <div>
+            <form th:object="${newComment}" th:action="@{/blog/__${blog.id}__/view/comment}" method="post">
+                <input hidden th:field="*{id}">
+                <textarea th:field="*{content}" placeholder="Add new comment..." style="width: 50%; height: 50px"></textarea><br>
+                <input type="submit" value="submit" class="btn btn-primary btn-sm">
+            </form>
+        </div>
+
+        <div th:each="comment : ${comments}">
+            <div th:object="${comment}">
+                <span th:text="*{date}" style="color: green; font-size: smaller"></span>
+                <p th:text="*{content}"></p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

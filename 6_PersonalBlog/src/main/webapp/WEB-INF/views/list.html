@@ -10,12 +10,16 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Title</th>
+        <th scope="col">Category</th>
         <th scope="col">Published Date</th>
       </tr>
       <tr th:each="blog : ${blogs}">
-        <td th:text="${blog.id}"></td>
-        <td><a th:text="${blog.title}" th:href="@{/blog/__${blog.id}__/view}"></a></td>
-        <td th:text="${blog.date}"></td>
+        <div th:object="${blog}">
+          <td th:text="*{id}"></td>
+          <td><a th:text="*{title}" th:href="@{/blog/__${blog.id}__/view}"></a></td>
+          <td><span th:text="*{category.name}"></span></td>
+          <td th:text="*{date}"></td>
+        </div>
       </tr>
     </table>
   </div>

@@ -1,8 +1,9 @@
 package com.codegym.config;
 
+import com.codegym.formatter.BlogFormatter;
 import com.codegym.formatter.CategoryFormatter;
-import com.codegym.repository.BlogRepository;
-import com.codegym.service.CategoryService;
+import com.codegym.service.blog.BlogService;
+import com.codegym.service.category.CategoryService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -121,5 +122,8 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryService.class)));
+        registry.addFormatter(new BlogFormatter(applicationContext.getBean(BlogService.class)));
     }
+
+
 }

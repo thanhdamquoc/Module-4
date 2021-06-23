@@ -1,26 +1,38 @@
-com/codegym/repository/BlogRepository.java
- com.codegym.repository.BlogRepository
-com/codegym/repository/CategoryRepository.java
- com.codegym.repository.CategoryRepository
-com/codegym/config/AppInit.java
- com.codegym.config.AppInit
-com/codegym/config/AppConfig.java
- com.codegym.config.AppConfig
-com/codegym/service/CategoryService.java
- com.codegym.service.CategoryService
-com/codegym/controller/CategoryController.java
- com.codegym.controller.CategoryController
-com/codegym/formatter/CategoryFormatter.java
- com.codegym.formatter.CategoryFormatter
-com/codegym/model/Category.java
- com.codegym.model.Category
-com/codegym/service/CategoryServiceImpl.java
- com.codegym.service.CategoryServiceImpl
-com/codegym/controller/BlogController.java
- com.codegym.controller.BlogController
-com/codegym/service/BlogService.java
- com.codegym.service.BlogService
 com/codegym/model/Blog.java
  com.codegym.model.Blog
-com/codegym/service/BlogServiceImpl.java
- com.codegym.service.BlogServiceImpl
+com/codegym/formatter/CategoryFormatter.java
+ com.codegym.formatter.CategoryFormatter
+com/codegym/service/category/CategoryService.java
+ com.codegym.service.category.CategoryService
+com/codegym/controller/CategoryController.java
+ com.codegym.controller.CategoryController
+com/codegym/repository/CommentRepository.java
+ com.codegym.repository.CommentRepository
+com/codegym/service/category/CategoryServiceImpl.java
+ com.codegym.service.category.CategoryServiceImpl
+com/codegym/model/Category.java
+ com.codegym.model.Category
+com/codegym/config/AppInit.java
+ com.codegym.config.AppInit
+com/codegym/repository/CategoryRepository.java
+ com.codegym.repository.CategoryRepository
+com/codegym/model/Comment.java
+ com.codegym.model.Comment
+com/codegym/service/comment/CommentServiceImpl.java
+ com.codegym.service.comment.CommentServiceImpl
+com/codegym/service/comment/CommentService.java
+ com.codegym.service.comment.CommentService
+com/codegym/service/blog/BlogService.java
+ com.codegym.service.blog.BlogService
+com/codegym/config/AppConfig.java
+ com.codegym.config.AppConfig
+com/codegym/service/blog/BlogServiceImpl.java
+ com.codegym.service.blog.BlogServiceImpl
+com/codegym/formatter/BlogFormatter.java
+ com.codegym.formatter.BlogFormatter
+com/codegym/model/IBlogComment.java
+ com.codegym.model.IBlogComment
+com/codegym/repository/BlogRepository.java
+ com.codegym.repository.BlogRepository
+com/codegym/controller/BlogController.java
+ com.codegym.controller.BlogController

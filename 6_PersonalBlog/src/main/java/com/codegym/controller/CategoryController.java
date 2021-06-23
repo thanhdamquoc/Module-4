@@ -1,8 +1,9 @@
 package com.codegym.controller;
 
 import com.codegym.model.Category;
-import com.codegym.service.CategoryService;
+import com.codegym.service.category.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +18,9 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping
-    public ModelAndView showIndex() {
+    public ModelAndView showIndex(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("/category/index");
-        modelAndView.addObject("categories", categoryService.findAll());
+        modelAndView.addObject("categories", categoryService.findAll(pageable));
         modelAndView.addObject("newCategory", new Category());
         return modelAndView;
     }

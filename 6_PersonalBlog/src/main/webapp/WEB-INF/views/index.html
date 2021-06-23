@@ -26,18 +26,38 @@
             </div>
         </div>
     </nav>
+
     <h1>News</h1>
     <div th:each="blog : ${blogs}" style="margin-top: 25px">
-        <a th:href="@{/blog/__${blog.id}__/view}" style="text-decoration: none; color: black"><h2 th:text="${blog.title}" style="border-top: 1px solid gray"></h2></a>
-        <div th:if="${blog.category}">
-            <span th:text="${blog.category.name}" style="color: blue"></span>
+        <div th:object="${blog}" style="border-top: 1px solid gray">
+            <table>
+                <tr>
+                    <td style="vertical-align: top">
+                        <img th:if="*{image}" th:src="*{image}" alt="image" width="200" style="padding: 10px">
+                        <div th:if="!*{image}" style="background-color: black; width: 200px; height: 200px"></div>
+                    </td>
+                    <td>
+                        <a th:href="@{/blog/__${blog.id}__/view}" style="text-decoration: none; color: black">
+                            <h2 th:text="*{title}"></h2>
+                        </a>
+
+<!--                        <span th:if="${blog.category}" th:text="*{category.name}" style="color: blue"></span>-->
+                        <span th:text="*{categoryName}" style="color: blue"></span>
+                        <span th:text="*{date}" style="color: green; font-size: smaller"></span>
+
+                        (<span th:text="*{id}" style="font-size: smaller"></span>)
+
+                        <p th:text="*{content}" style="margin-bottom: 0px"></p>
+
+                        <span th:text="*{likes}" style="font-weight: bold"></span> likes
+                        <span th:text="*{commentCount}" style="font-weight: bold"></span> comments<br>
+                        <a th:href="@{/blog/__${blog.id}__/like}" class="btn btn-primary btn-sm">Like</a>
+                        <a th:href="@{/blog/__${blog.id}__/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
+                        <a th:href="@{/blog/__${blog.id}__/view}" class="btn btn-primary btn-sm">Comment</a>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <span th:text="${blog.date}" style="color: green; font-size: smaller"></span>
-        (<span th:text="${blog.id}" style="font-size: smaller"></span>)
-        <p th:text="${blog.content}" style="margin-bottom: 0px"></p>
-        <span th:text="${blog.likes}" style="font-weight: bold"></span> likes<br>
-        <a th:href="@{/blog/__${blog.id}__/like}" class="btn btn-primary btn-sm">Like</a>
-        <a th:href="@{/blog/__${blog.id}__/unlike}" class="btn btn-secondary btn-sm">Unlike</a>
     </div>
 </div>
 </body>

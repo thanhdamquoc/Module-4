@@ -1,6 +1,7 @@
 package com.codegym.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -11,6 +12,7 @@ public class Blog {
 
     private String title;
 
+    @NotEmpty
     private String content;
 
     private int likes;
@@ -19,6 +21,8 @@ public class Blog {
 
     @ManyToOne
     private Category category;
+
+    private String image;
 
     public Blog() {
     }
@@ -93,5 +97,13 @@ public class Blog {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
