@@ -6,7 +6,8 @@
 <div class="container">
     <nav th:replace="index::navbar"></nav>
     <div>
-        <div th:object="${blog}">
+        <h1>Article</h1>
+        <div th:object="${blog}" style="margin-top: 25px; border-top: 1px solid gray">
             <h2 th:text="${blog.title}"></h2>
             <img th:if="*{image}" th:src="*{image}"><br>
             <span th:text="${blog.category.name}" style="color: blue"></span>

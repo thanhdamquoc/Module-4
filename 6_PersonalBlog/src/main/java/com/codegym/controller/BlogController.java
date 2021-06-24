@@ -47,6 +47,9 @@ public class BlogController {
     @PostMapping("/add")
     public String addBlog(@ModelAttribute Blog blog) {
         blog.setDate(new Date());
+        if (blog.getImage().equals("")) {
+            blog.setImage(null);
+        }
         blogService.save(blog);
         return "redirect:/blog";
     }

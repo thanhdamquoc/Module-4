@@ -1,9 +1,11 @@
-com/codegym/formatter/BlogFormatter.java
- com.codegym.formatter.BlogFormatter
+com/codegym/model/ForbiddenWord.java
+ com.codegym.model.ForbiddenWord
 com/codegym/service/blog/BlogServiceImpl.java
  com.codegym.service.blog.BlogServiceImpl
 com/codegym/repository/ForbiddenWordRepository.java
  com.codegym.repository.ForbiddenWordRepository
+com/codegym/exception/HasForbiddenWordsException.java
+ com.codegym.exception.HasForbiddenWordsException
 com/codegym/service/blog/BlogService.java
  com.codegym.service.blog.BlogService
 com/codegym/model/IBlogComment.java
@@ -24,23 +26,21 @@ com/codegym/service/comment/CommentService.java
  com.codegym.service.comment.CommentService
 com/codegym/repository/BlogRepository.java
  com.codegym.repository.BlogRepository
+com/codegym/formatter/BlogFormatter.java
+ com.codegym.formatter.BlogFormatter
 com/codegym/controller/CategoryController.java
  com.codegym.controller.CategoryController
 com/codegym/formatter/CategoryFormatter.java
  com.codegym.formatter.CategoryFormatter
 com/codegym/service/category/CategoryService.java
  com.codegym.service.category.CategoryService
-com/codegym/model/ForbiddenWord.java
- com.codegym.model.ForbiddenWord
 com/codegym/model/Comment.java
  com.codegym.model.Comment
-com/codegym/controller/BlogController.java
- com.codegym.controller.BlogController
-com/codegym/exception/HasForbiddenWordsException.java
- com.codegym.exception.HasForbiddenWordsException
+com/codegym/logger/Logger.java
+ com.codegym.logger.Logger
 com/codegym/config/AppInit.java
  com.codegym.config.AppInit
 com/codegym/config/AppConfig.java
  com.codegym.config.AppConfig
-com/codegym/aspect/Logger.java
- com.codegym.aspect.Logger
+com/codegym/controller/BlogController.java
+ com.codegym.controller.BlogController

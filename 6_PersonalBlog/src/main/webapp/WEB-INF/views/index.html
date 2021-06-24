@@ -34,7 +34,6 @@
                 <tr>
                     <td style="vertical-align: top">
                         <img th:if="*{image}" th:src="*{image}" alt="image" width="200" style="padding: 10px">
-                        <div th:if="!*{image}" style="background-color: black; width: 200px; height: 200px"></div>
                     </td>
                     <td>
                         <a th:href="@{/blog/__${blog.id}__/view}" style="text-decoration: none; color: black">
