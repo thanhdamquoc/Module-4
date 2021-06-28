@@ -1,5 +1,7 @@
 package com.codegym.controller;
 
+import com.codegym.exception.ProductNotFoundException;
+import com.codegym.model.Cart;
 import com.codegym.model.Product;
 import com.codegym.model.ProductForm;
 import com.codegym.service.CategoryService;
@@ -7,7 +9,6 @@ import com.codegym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/product")
+@SessionAttributes("cart")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -28,8 +30,13 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
+    @ModelAttribute("cart")
+    private Cart cart() {
+        return new Cart();
+    }
+
     @GetMapping
-    public ModelAndView showIndex(@PageableDefault(size = 5) Pageable pageable, @RequestParam Optional<String> q) {
+    public ModelAndView showIndex(Pageable pageable, @RequestParam Optional<String> q) {
         ModelAndView modelAndView = new ModelAndView("product/index");
         Page<Product> products;
         String query;
@@ -67,7 +74,12 @@ public class ProductController {
     @GetMapping("/{id}/view")
     public ModelAndView showView(@PathVariable Long id) {
         ModelAndView modelAndView = new ModelAndView("product/view");
-        Product product = productService.findById(id).get();
+        Product product = null;
+        try {
+            product = productService.findById(id).get();
+        } catch (ProductNotFoundException e) {
+            return new ModelAndView("/product/error");
+        }
         modelAndView.addObject("product", product);
         modelAndView.addObject("categories", categoryService.findAll());
         return modelAndView;
@@ -89,6 +101,21 @@ public class ProductController {
     @GetMapping("/{id}/remove")
     public String removeProduct(@PathVariable Long id) {
         productService.remove(id);
+        return "redirect:/product";
+    }
+
+    @GetMapping("/{id}/add")
+    public String addProductToCart(@PathVariable Long id, @ModelAttribute Cart cart) {
+        Optional<Product> productOptional = null;
+        try {
+            productOptional = productService.findById(id);
+        } catch (ProductNotFoundException e) {
+            return "/product/error";
+        }
+        if (!productOptional.isPresent()) {
+            return "/product/error";
+        }
+        cart.add(productOptional.get());
         return "redirect:/product";
     }
 }

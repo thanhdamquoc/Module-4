@@ -15,6 +15,7 @@
     <input type="text" th:name="q" th:value="${q}">
     <button>search</button>
 </form>
+<a th:href="@{/cart}">Shopping cart</a>
 <table>
     <tr>
         <th>ID</th>
@@ -22,6 +23,7 @@
         <th>Image</th>
         <th>Category</th>
         <th>Actions</th>
+        <th>Add to cart</th>
     </tr>
     <tr th:each="product : ${products}">
         <div th:object="${product}">
@@ -30,6 +32,7 @@
             <td><img width="100" th:src="@{'/image/' + *{image}}" alt=""></td>
             <td><span th:text="*{category.name}"></span></td>
             <td><a th:href="@{/product/{id}/view(id = *{id})}">view</a></td>
+            <td><a th:href="@{/product/{id}/add(id = *{id})}">add to cart</a></td>
         </div>
     </tr>
     <tr>
@@ -43,6 +46,7 @@
                 </select>
             </td>
             <td><input type="submit" value="add"></td>
+            <td></td>
         </form>
     </tr>
 </table>

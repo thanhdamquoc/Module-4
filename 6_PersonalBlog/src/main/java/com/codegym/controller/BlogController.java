@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.exception.HasForbiddenWordsException;
 import com.codegym.model.Blog;
 import com.codegym.model.Comment;
+import com.codegym.model.User;
 import com.codegym.service.blog.BlogService;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.comment.CommentService;
@@ -19,6 +20,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/blog")
+@SessionAttributes("loginUser")
 public class BlogController {
     @Autowired
     private BlogService blogService;
@@ -29,11 +31,14 @@ public class BlogController {
     @Autowired
     private CommentService commentService;
 
+    @ModelAttribute(name = "loginUser")
+    private User loginUser(){
+        return new User();
+    }
+
     @GetMapping
-    public ModelAndView showIndex(@PageableDefault(sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable) {
-        ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("blogs", blogService.getBlogAndComment());
-        return modelAndView;
+    public ModelAndView showIndex(@ModelAttribute User loginUser) {
+        return new ModelAndView("index", "blogs", blogService.getBlogAndComment());
     }
 
     @GetMapping("/add")
