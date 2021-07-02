@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table, tr, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h1>Add new user</h1>
+<table>
+    <tr>
+        <th><span>Username</span></th>
+        <td>
+            <input type="text" id="new-username">
+        </td>
+    </tr>
+    <tr>
+        <th><span>Password</span></th>
+        <td>
+            <input type="text" id="new-password">
+        </td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>
+            <button id="add-new-btn" onclick="addNewUser()">
+                Submit
+            </button>
+        </td>
+    </tr>
+</table>
+
+<h1>List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody id="table-body">
+    <tr th:each="user, loopState : ${users}">
+        <div th:object="${user}">
+            <td><span th:text="${loopState.count}"></span></td>
+            <td><span th:text="*{id}"></span></td>
+            <td><span th:text="*{username}"></span></td>
+            <td><span th:text="*{password}"></span></td>
+            <td>
+                <button th:onclick="removeUser(this.id)" th:id="*{id}">Remove</button>
+            </td>
+        </div>
+    </tr>
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function removeUser(id) {
+        let url = "/users/" + id;
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "DELETE",
+            url: url,
+            success: function () {
+                console.log("user id " + id + " removed")
+                updateList();
+            }
+        });
+    }
+
+    function addNewUser() {
+        let username = $('#new-username').val();
+        let password = $('#new-password').val();
+        let user = {
+            username: username,
+            password: password,
+        };
+
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: "POST",
+            data: JSON.stringify(user),
+            url: "/users",
+            success: function () {
+                console.log("user " + username + " added");
+                updateList();
+            }
+        });
+        event.preventDefault();
+    }
+
+    function redrawList(users) {
+        let tableContent = "<table>";
+        for (let i = 0; i < users.length; i++) {
+            tableContent += "<tr>";
+            tableContent += "<td><span>" + (i+1) + "</span></td>";
+            tableContent += "<td><span>" + users[i].id + "</span></td>";
+            tableContent += "<td><span>" + users[i].username + "</span></td>";
+            tableContent += "<td><span>" + users[i].password + "</span></td>";
+            tableContent += "<td><button onClick=\"removeUser(" + users[i].id + ")\">Remove</button></td>";
+            tableContent += "</tr>";
+        }
+        tableContent += "</table>";
+        $('#table-body').html(tableContent);
+    }
+
+    function updateList() {
+        $.ajax({
+            type: "GET",
+            url: "/users/all",
+            success: function (data) {
+                redrawList(data);
+                console.log("list updated!");
+            }
+        });
+    }
+</script>
+</body>
+</html>

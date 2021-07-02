@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Loggers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<nav style="position: fixed; top: 0; width: 100%; background-color: darkgray" th:fragment="nav" class="navbar">
+    <div class="container">
+        <a href="/">Home</a>
+<!--        Login-->
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            Welcome, <span sec:authentication="principal.username"></span>!
+            <a th:href="@{/logout}" class="btn btn-primary btn-sm">Log out</a>
+            <input type="hidden" th:value="${loginUserId}" id="login-user-id-div">
+        </div>
+    </div>
+</nav>
+
+<div style="margin-top: 50px" class="container">
+    <!--    create new post button-->
+    <div style="margin-top: 20px">
+        <button type="button" class="btn btn-primary" onclick="showModal()">
+            Create new blog
+        </button>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Writing new blog</h5>
+                    <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">Close
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="new-blog-title" placeholder="Blog title"><br>
+                    <textarea id="new-blog-content" placeholder="Blog content"
+                              style="margin-top: 20px; width: 100%; height: 200px;"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addNewBlog()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    page content: blogs-->
+    <div id="page-content">
+        <div th:each="blog : ${blogs}">
+            <div th:object="${blog}" style="margin-top: 20px">
+                <h2 th:text="*{title}"></h2>
+                <span>Posted by </span>
+                <span th:text="*{user.username}" style="font-weight: bold"></span>
+                <span> at </span>
+                <span style="font-weight: bold" th:text="*{date}"></span>
+                <p th:text="*{content}"></p>
+                <div>
+                    <a class="btn btn-primary btn-sm">Like</a>
+                    <a class="btn btn-secondary btn-sm">Unlike</a>
+                    <a class="btn btn-primary btn-sm">Comment</a>
+                    <a class="btn btn-primary btn-sm" th:if="${loginUserId == blog.user.id}" th:text="Edit"></a>
+                    <a class="btn btn-danger btn-sm" th:if="${loginUserId == blog.user.id}" th:text="Delete"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--javascript-->
+<script>
+    let userId = $('#login-user-id-div').val();
+
+    function showModal() {
+        if (userId != null) {
+            $('#exampleModal').modal('show');
+        } else {
+            alert("Please log in first");
+        }
+    }
+
+    function addNewBlog() {
+        //get data from input using javascript
+        let title = $('#new-blog-title').val();
+        let content = $('#new-blog-content').val();
+        let blog = {
+            title: title,
+            content: content,
+            user: {
+                id: userId
+            }
+        }
+        //call ajax
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem("token"),
+            },
+            type: "POST",
+            data: JSON.stringify(blog),
+            url: "/blogs",
+            success: function () {
+                console.log("new blog *" + title + "* added");
+                updateBlogs(); //update list
+                $('#exampleModal').modal('hide'); //hide modal
+                $('#new-blog-title').val(""); //clear modal content
+                $('#new-blog-content').val("");
+            },
+            error: function () {
+                console.log("new blog *" + title + "* NOT added");
+                $('#exampleModal').modal('hide'); //hide modal
+            }
+        });
+    }
+
+    2
+
+    function updateBlogs() {
+        $.ajax({
+            type: "GET",
+            url: "/blogs",
+            success: function (blogs) {
+                console.log(blogs);
+                let content = "";
+                for (let i = 0; i < blogs.length; i++) {
+                    let blog = blogs[i];
+                    content +=
+                    `<div style="margin-top: 20px">
+                        <h2>${blog.title}</h2>
+                        <span>Posted by </span>
+                        <span style="font-weight: bold">${blog.user.username}</span>
+                        <span> at </span>
+                        <span style="font-weight: bold">${blog.date}</span>
+                        <p>${blog.content}
+                        <div>
+                            <a class="btn btn-primary btn-sm">Like</a>
+                            <a class="btn btn-secondary btn-sm">Unlike</a>
+                            <a class="btn btn-primary btn-sm">Comment</a>
+                        </div>
+                    </div>`
+                };
+                $('#page-content').html(content);
+                console.log("done updating");
+            }
+        });
+    }
+</script>
+</body>
+</html>
