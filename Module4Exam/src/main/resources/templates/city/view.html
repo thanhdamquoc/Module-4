@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cities</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div th:object="${city}">
+        <h1><span th:text="*{name}"></span> City</h1>
+        <a th:href="@{/cities}" class="btn btn-primary">Back to City List</a>
+        <input type="hidden" th:value="*{id}" id="city-id">
+        <div>
+            <span>Name: </span>
+            <span th:text="*{name}"></span>
+        </div>
+        <div>
+            <span>Country: </span>
+            <span th:text="*{country.name}"></span>
+        </div>
+        <div>
+            <span>Area: </span>
+            <span th:text="*{area}"></span>
+        </div>
+        <div>
+            <span>Population: </span>
+            <span th:text="*{population}"></span>
+        </div>
+        <div>
+            <span>GDP: </span>
+            <span th:text="*{gdp}"></span>
+        </div>
+        <div>
+            <span>Description: </span><br>
+            <p th:text="*{description}"></p>
+        </div>
+    </div>
+    <a type="button" class="btn btn-primary" th:href="@{/cities/__${city.id}__/edit}">Edit</a>
+    <button type="button" class="btn btn-danger" onclick="showDeleteConfirmation()"
+            th:href="@{/cities/__${city.id}__/remove}">Delete
+    </button>
+</div>
+</body>
+<script>
+    function showDeleteConfirmation() {
+        let cityId = document.getElementById("city-id").value;
+        let isSure = confirm("Are you sure you want to delete this city?")
+        if (isSure) {
+            let redirect = "/cities/" + cityId + "/remove";
+            window.location.href = redirect;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cities</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Edit <span th:text="${city.name}"></span> City</h1>
+    <div th:if="${message}">
+        <span th:text="${message}"></span>
+    </div>
+    <form th:action="@{/cities/__${city.id}__/edit}" method="post" th:object="${city}">
+        <table>
+            <input type="hidden" th:field="*{id}">
+            <tr>
+                <td><span>Name:</span></td>
+                <td><input th:field="*{name}"></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </tr>
+            <tr>
+                <td><span>Country:</span></td>
+                <td>
+                    <select th:field="*{country}">
+                        <option th:each="countryOption : ${countries}" th:value="${countryOption.id}" th:text="${countryOption.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><span>Area:</span></td>
+                <td><input th:field="*{area}"></td>
+                <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}">Name Error</td>
+            </tr>
+            <tr>
+                <td><span>Population:</span></td>
+                <td><input th:field="*{population}"></td>
+                <td th:if="${#fields.hasErrors('population')}" th:errors="*{population}">Name Error</td>
+            </tr>
+            <tr>
+                <td><span>GDP:</span></td>
+                <td><input th:field="*{gdp}"></td>
+                <td th:if="${#fields.hasErrors('gdp')}" th:errors="*{gdp}">Name Error</td>
+            </tr>
+            <tr>
+                <td><span>Description:</span></td>
+                <td><textarea th:field="*{description}"></textarea></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a th:href="@{/cities/__${city.id}__}" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+</body>
+</html>
